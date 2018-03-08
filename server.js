@@ -1,6 +1,11 @@
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
+
+// Middleeare
+
+app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
   const name = 'Dang';
