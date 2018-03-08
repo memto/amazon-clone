@@ -1,0 +1,12 @@
+{
+  "name": "amazon-clone",
+  "version": "1.0.0",
+  "description": "build-an-amazon-clone-nodejs-stripe-elasticsearch",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}
