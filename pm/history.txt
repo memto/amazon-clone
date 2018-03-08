@@ -4,5 +4,11 @@ DONE:
 
 - setup git and add first commit
 
-TODO:
 - add eslint and config
+
+- connected to mlab database
+note about mongodb://<dbuser>:<dbpassword>@ds261138.mlab.com:61138/amazonclone
+here *dbuser* need to be created on user tab on selected db, 
+this is not *account* used to login to mlab itself.
+
+TODO:
