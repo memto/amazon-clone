@@ -1,0 +1,8 @@
+DONE:
+- setup project by run npm init
+- add pm/history.txt for project management purpose
+
+- setup git and add first commit
+
+TODO:
+- add eslint and config
