@@ -48,3 +48,5 @@ UserSchema.pre('save', (next) => {
 
 // compare password
 UserSchema.methods.comparePassword = password => bcrypt.compareSync(password, this.password);
+
+export default mongoose.model('User', UserSchema);
