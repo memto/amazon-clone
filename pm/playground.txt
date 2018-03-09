@@ -1,0 +1,21 @@
+- promise
+
+const apromise = new Promise(function async(resolve, reject) {
+  // do smth
+
+  // then resolve
+
+  // or reject
+});
+
+- Here *async* be called with *resolve, reject* are function from Promise
+implementation
+- Promise keeps its state about *value* it promises to give
+and *onResolved, onRejected* callbacks
+- if *async* *resolve or reject* with a *value* 
+before caller call .then on *apromise* the *value* is kept.
+when caller call .then with *onResolved* attached
+*apromise* will call that *onResolved* with its *value*
+- if caller call .then before *async* call *resolve*, the *onResolved, *onRejected*
+attached to .then are kept. when *async* call *resolve* with *value*
+the *onResolved* will be call with that *value*
