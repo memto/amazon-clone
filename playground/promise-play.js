@@ -12,17 +12,28 @@ function PromiseX(fn) {
     }
   }
 
-  function handle(onResolved) {
-    if (state === 'pending') {
-      deferred = onResolved; // B
+  function handle(handler) {
+    if (state === 'pending') { // B
+      deferred = handler; // B
       return;
     }
 
-    onResolved(value); // B
+    if (!handler.onResolved) { // B
+      handler.resolve(value); // B
+      return;
+    }
+
+    const ret = handler.onResolved(value);
+    handler.resolve(ret); // B
   }
 
   this.then = function (onResolved) {
-    handle(onResolved); // B
+    return new PromiseX(function async(resolve) {
+      handle({
+        onResolved,
+        resolve,
+      });
+    });
   };
 
   fn(resolve); // B
@@ -33,7 +44,16 @@ const apromise1 = new PromiseX(function (resolve) { // B
   resolve('apromise1'); // B
 });
 
-apromise1.then((x) => { // B
+const apromise1Then = apromise1.then((x) => { // B
+  console.log(x); // B
+  return x + x;
+});
+
+const apromise1ThenThen = apromise1Then.then((x) => { // B
+  console.log(x); // B
+});
+
+apromise1ThenThen.then((x) => { // B
   console.log(x); // B
 });
 
