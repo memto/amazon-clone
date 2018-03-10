@@ -30,18 +30,16 @@ const UserSchema = new Schema({
 });
 
 // hash the password
-UserSchema.pre('save', (next) => {
+UserSchema.pre('save', function cbPre(next) {
   const user = this;
 
   if (!user.isModified('password')) return next();
 
   return bcrypt.genSalt(10)
-    .then((salt) => {
-      bcrypt.hash(user.password, salt, null)
-        .then((hash) => {
-          user.password = hash;
-          return next();
-        });
+    .then(salt => bcrypt.hash(user.password, salt))
+    .then((hash) => {
+      user.password = hash;
+      return next();
     })
     .catch(err => next(err));
 });
@@ -49,4 +47,4 @@ UserSchema.pre('save', (next) => {
 // compare password
 UserSchema.methods.comparePassword = password => bcrypt.compareSync(password, this.password);
 
-export default mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

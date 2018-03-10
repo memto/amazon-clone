@@ -11,4 +11,9 @@ note about mongodb://<dbuser>:<dbpassword>@ds261138.mlab.com:61138/amazonclone
 here *dbuser* need to be created on user tab on selected db, 
 this is not *account* used to login to mlab itself.
 
+- Schema.pre must has a function style cb not arrow function because 
+of fat arrow lexically binds the function to current scope so *this*
+will not be *Schema* instance
+
+
 TODO:
