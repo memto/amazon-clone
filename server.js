@@ -27,8 +27,7 @@ app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-  const name = 'Dang';
-  res.json(`My name is ${name}`);
+  res.render('home');
 });
 
 app.post('/user/add', (req, res, next) => {
