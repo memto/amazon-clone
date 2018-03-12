@@ -27,7 +27,11 @@ app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-  res.render('home');
+  res.render('main/home');
+});
+
+app.get('/about', (req, res) => {
+  res.render('main/about');
 });
 
 app.post('/user/add', (req, res, next) => {
