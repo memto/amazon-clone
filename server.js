@@ -4,8 +4,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const ejsMate = require('ejs-mate');
 
-const User = require('./models/users');
-
 // connect db
 mongoose.connect('mongodb://root:pW20081790@ds261138.mlab.com:61138/amazonclone', (err) => {
   if (err) {
@@ -27,27 +25,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-  res.render('main/home');
-});
+const mainRoute = require('./routes/main');
+const usersRoute = require('./routes/users');
 
-app.get('/about', (req, res) => {
-  res.render('main/about');
-});
-
-app.post('/user/add', (req, res, next) => {
-  const user = new User();
-  user.profile.name = req.body.name;
-  user.email = req.body.email;
-  user.password = req.body.password;
-
-  user.save((err) => {
-    if (err) return next(err);
-
-    res.json('user created successfully');
-    return next();
-  });
-});
+app.use('/', mainRoute);
+app.use('/user', usersRoute);
 
 app.listen(3000, (err) => {
   if (err) throw err;
