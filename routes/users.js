@@ -2,7 +2,7 @@ const router = require('express').Router();
 const User = require('../models/users');
 
 router.get('/signup', (req, res) => {
-  res.render('acount/signup');
+  res.render('acount/signup', { errors: req.flash().errors });
 });
 
 router.post('/signup', (req, res, next) => {
@@ -12,7 +12,7 @@ router.post('/signup', (req, res, next) => {
       if (err) return next(Error('Database Error'));
 
       if (existUser) {
-        console.log(`${email} is already existed`);
+        req.flash('errors', 'Email already existed');
 
         return res.redirect('signup');
       }
@@ -25,13 +25,12 @@ router.post('/signup', (req, res, next) => {
       return user.save((errSave) => {
         if (errSave) return next(errSave);
 
-        res.json('user created successfully');
-        return next();
+        return res.redirect('/'); // should be redirect to profile
       });
     });
     return 0;
   }
-  console.log('email field is required');
+  req.flash('errors', 'Email field is required');
   return res.redirect('signup');
 });
 
