@@ -2,7 +2,7 @@ const router = require('express').Router();
 const User = require('../models/users');
 
 router.get('/signup', (req, res) => {
-  res.render('acount/signup', { errors: req.flash().errors });
+  res.render('acount/signup', { errors: req.flash('errors') });
 });
 
 router.post('/signup', (req, res, next) => {
