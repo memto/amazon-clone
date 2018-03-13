@@ -3,6 +3,9 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const ejsMate = require('ejs-mate');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const flash = require('express-flash');
 
 // connect db
 mongoose.connect('mongodb://root:pW20081790@ds261138.mlab.com:61138/amazonclone', (err) => {
@@ -21,6 +24,14 @@ app.use(express.static(`${__dirname}/public`));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(cookieParser());
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: 'gnad@@#@$@!',
+}));
+app.use(flash());
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
