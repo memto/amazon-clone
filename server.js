@@ -14,13 +14,22 @@ mongoose.connect('mongodb://root:pW20081790@ds261138.mlab.com:61138/amazonclone'
 
 const app = express();
 
+app.set('view engine', 'ejs');
+
 // Middleeare
 
 app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
-  const name = 'Dang';
-  res.json(`My name is ${name}`);
+  res.render('index');
+});
+
+app.get('/test', (req, res) => {
+  res.render('test');
+});
+
+app.get('/test-result', (req, res) => {
+  res.send(req.query);
 });
 
 app.listen(3000, (err) => {
