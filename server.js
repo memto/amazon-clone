@@ -6,6 +6,7 @@ const ejsMate = require('ejs-mate');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('express-flash');
+const MongoStore = require('connect-mongo')(session);
 
 const secret = require('./config/secret');
 
@@ -32,6 +33,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   secret: secret.secretKey,
+  store: new MongoStore({ url: secret.getDbUri(), autoReconnect: true }),
 }));
 app.use(flash());
 
