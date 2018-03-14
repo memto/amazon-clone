@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('express-flash');
 const MongoStore = require('connect-mongo')(session);
+const passport = require('passport');
 
 const secret = require('./config/secret');
 
@@ -36,6 +37,7 @@ app.use(session({
   store: new MongoStore({ url: secret.getDbUri(), autoReconnect: true }),
 }));
 app.use(flash());
+app.use(passport.initialize());
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
