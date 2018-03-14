@@ -2,6 +2,10 @@ const router = require('express').Router();
 const User = require('../models/users');
 
 router.get('/signup', (req, res) => {
+  // console.log("===");
+  // console.log('===cookies===', req.cookies);
+  // console.log('===session===', req.session);
+  // console.log('===flash===', req.flash());
   res.render('acount/signup', { errors: req.flash('errors') });
 });
 

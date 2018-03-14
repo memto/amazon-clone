@@ -15,5 +15,17 @@ this is not *account* used to login to mlab itself.
 of fat arrow lexically binds the function to current scope so *this*
 will not be *Schema* instance
 
+-// cookie-parser, express-session, express-flash
+- both cookie and session are place to store data
+- cookie store data on client side, thus can be accessed by user
+  - cookie is sent by browser to server each request
+  - cookie-parser is used to parser that cookie
+- session store data on server side, thus cannot be accessed by user
+  - server identify user using a session id (session.sid)
+  - session.sid is stored in cookie (signed or unsinged)
+  - because cookie is sent by browser to server each request, 
+  server will get session.sid from cookie to identify user from session
+  - express-session is used to handle above steps
+- flash using exppres-session to pass message from route to route
 
 TODO:
