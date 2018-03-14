@@ -7,8 +7,10 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('express-flash');
 
+const secret = require('./config/secret');
+
 // connect db
-mongoose.connect('mongodb://root:pW20081790@ds261138.mlab.com:61138/amazonclone', (err) => {
+mongoose.connect(secret.getDbUri(), (err) => {
   if (err) {
     console.log(err);
   } else {
@@ -29,7 +31,7 @@ app.use(cookieParser());
 app.use(session({
   resave: true,
   saveUninitialized: true,
-  secret: 'gnad@@#@$@!',
+  secret: secret.secretKey,
 }));
 app.use(flash());
 
@@ -42,8 +44,8 @@ const usersRoute = require('./routes/users');
 app.use('/', mainRoute);
 app.use('/user', usersRoute);
 
-app.listen(3000, (err) => {
+app.listen(secret.serverPort, (err) => {
   if (err) throw err;
 
-  console.log('server is listening on port 3000');
+  console.log(`server is listening on port ${secret.serverPort}`);
 });
