@@ -42,8 +42,10 @@ app.set('view engine', 'ejs');
 
 const mainRoute = require('./routes/main');
 const usersRoute = require('./routes/users');
+const loginRoute = require('./routes/authentication/login');
 
 app.use('/', mainRoute);
+app.use('/', loginRoute);
 app.use('/user', usersRoute);
 
 app.listen(secret.serverPort, (err) => {
