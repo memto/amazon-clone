@@ -6,7 +6,10 @@ router.get('/signup', (req, res) => {
   // console.log('===cookies===', req.cookies);
   // console.log('===session===', req.session);
   // console.log('===flash===', req.flash());
-  res.render('authentication/signup', { errors: req.flash('errors') });
+
+  if (req.user) return res.redirect('/');
+
+  return res.render('authentication/signup', { errors: req.flash('errors') });
 });
 
 router.post('/signup', (req, res, next) => {
