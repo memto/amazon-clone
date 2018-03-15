@@ -40,6 +40,11 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  return next();
+});
+
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 
