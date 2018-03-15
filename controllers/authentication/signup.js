@@ -32,7 +32,11 @@ router.post('/signup', (req, res, next) => {
       return user.save((errSave) => {
         if (errSave) return next(errSave);
 
-        return res.redirect('/'); // should be redirect to profile
+        return req.logIn(user, (errLogIn) => {
+          if (errLogIn) return next(errLogIn);
+
+          return res.redirect('/profile');
+        });
       });
     });
     return 0;
