@@ -44,12 +44,12 @@ app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 
 const mainRoute = require('./routes/main');
-const usersRoute = require('./routes/users');
-const loginRoute = require('./routes/authentication/login');
+const authenRoute = require('./routes/authentication');
+const accountRoute = require('./routes/account');
 
 app.use('/', mainRoute);
-app.use('/', loginRoute);
-app.use('/user', usersRoute);
+authenRoute(app);
+accountRoute(app);
 
 app.listen(secret.serverPort, (err) => {
   if (err) throw err;
