@@ -43,13 +43,13 @@ app.use(passport.session());
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 
-const mainRoute = require('./routes/main');
-const authenRoute = require('./routes/authentication');
-const accountRoute = require('./routes/account');
+const mainController = require('./controllers/main');
+const authenController = require('./controllers/authentication');
+const accountController = require('./controllers/account');
 
-app.use('/', mainRoute);
-authenRoute(app);
-accountRoute(app);
+app.use('/', mainController);
+authenController(app);
+accountController(app);
 
 app.listen(secret.serverPort, (err) => {
   if (err) throw err;
