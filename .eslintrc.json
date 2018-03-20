@@ -7,6 +7,7 @@
         "no-unused-vars":["error", {
             "vars": "local",
             "args": "none"
-        }]
+        }],
+        "no-underscore-dangle": ["error", { "allow": ["_id"] }]
     }
 }
