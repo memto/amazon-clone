@@ -8,6 +8,7 @@ passport.use('local-login', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true,
 }, (req, email, password, done) => {
+  console.log('local-login');
   User.findOne({ email }, (err, user) => {
     if (err) return done(err);
 
@@ -23,11 +24,13 @@ passport.use('local-login', new LocalStrategy({
 // get passed user from above middleware
 // serialize it to save into session
 passport.serializeUser((user, done) => {
+  console.log('serializeUser');
   done(null, user._id);
 });
 
 //= get id from passport session and find it from db
 passport.deserializeUser((id, done) => {
+  console.log('deserializeUser');
   User.findById(id, (err, user) => {
     done(err, user);
   });

@@ -2,6 +2,7 @@ const router = require('express').Router();
 const User = require('../../models/users');
 
 router.get('/profile', (req, res) => {
+  console.log('get /profile');
   if (req.user) {
     return res.render('account/profile');
   }
@@ -10,6 +11,7 @@ router.get('/profile', (req, res) => {
 });
 
 router.get('/edit-profile', (req, res) => {
+  console.log('get /edit-profile');
   if (req.user) {
     return res.render('account/edit-profile', { editProfileMessage: req.flash('editProfileMessage') });
   }
@@ -18,6 +20,7 @@ router.get('/edit-profile', (req, res) => {
 });
 
 router.post('/edit-profile', (req, res, next) => {
+  console.log('post /edit-profile');
   User.findById(req.user._id, (err, user) => {
     if (err) return next(err);
 

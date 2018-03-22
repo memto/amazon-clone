@@ -3,6 +3,7 @@ const passport = require('passport');
 require('../../config/passport');
 
 router.get('/login', (req, res) => {
+  console.log('get /login');
   if (req.user) return res.redirect('/');
 
   return res.render('authentication/login', { loginMessage: req.flash('loginMessage') });
