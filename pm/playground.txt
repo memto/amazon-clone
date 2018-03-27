@@ -19,3 +19,16 @@ when caller call .then with *onResolved* attached
 - if caller call .then before *async* call *resolve*, the *onResolved, *onRejected*
 attached to .then are kept. when *async* call *resolve* with *value*
 the *onResolved* will be call with that *value*
+
+- express session fix
+      if (shouldSave(req)) {
+        req.session.save(function onsave(err) {
+          if (err) {
+            defer(next, err);
+          }        
+          console.log("save done", req.session);
+          writeend();
+        });
+
+        return;
+        // return writetop();

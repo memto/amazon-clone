@@ -19,7 +19,6 @@ const app = express();
 app.set('view engine', 'ejs');
 
 // Middleeare
-
 app.use(morgan('dev'));
 app.use(cookieParser('GNAD0991'));
 app.use(session({
