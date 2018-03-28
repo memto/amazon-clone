@@ -31,34 +31,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-app.use((req, res, next) => {
-  console.log('1', req.session, req.flash ? req.flash() : req.flash, req._passport);
-  return session({
-    resave: true,
-    saveUninitialized: true,
-    secret: secret.secretKey,
-    store: new FileStore({ path: '../sessions' }),
-  })(req, res, next);
-});
-app.use((req, res, next) => {
-  console.log('2', req.session, req.flash ? req.flash() : req.flash, req._passport);
-  return flash()(req, res, next);
-});
-app.use((req, res, next) => {
-  console.log('3', req.session, req.flash ? req.flash() : req.flash, req._passport);
-  return passport.initialize()(req, res, next);
-});
-app.use((req, res, next) => {
-  console.log('passport.middle');
-  next();
-});
-app.use((req, res, next) => {
-  console.log('4', req.session, req.flash ? req.flash() : req.flash, req._passport);
-  return passport.session()(req, res, next);
-});
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: secret.secretKey,
+  store: new FileStore({ path: '../sessions' }),
+}));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use((req, res, next) => {
-  console.log('5', req.session, req.flash ? req.flash() : req.flash, req._passport);
   res.locals.user = req.user;
   return next();
 });
