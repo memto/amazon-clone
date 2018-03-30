@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.6.0",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "connect-mongo": "^2.0.1",
@@ -18,6 +19,7 @@
     "express": "^4.16.2",
     "express-flash": "0.0.2",
     "express-session": "^1.15.6",
+    "faker": "^4.1.0",
     "mongoose": "^5.0.9",
     "morgan": "^1.9.0",
     "passport": "^0.4.0",
