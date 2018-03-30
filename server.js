@@ -11,6 +11,8 @@ const passport = require('passport');
 
 const secret = require('./config/secret');
 
+const Category = require('./models/category');
+
 // connect db
 mongoose.connect(secret.getDbUri(), (err) => {
   if (err) {
@@ -43,6 +45,15 @@ app.use(passport.session());
 app.use((req, res, next) => {
   res.locals.user = req.user;
   return next();
+});
+
+app.use((req, res, next) => {
+  Category.find({}, (err, categories) => {
+    if (err) return next(err);
+
+    res.locals.categoriesName = categories.map(cat => cat.name);
+    return next();
+  });
 });
 
 app.engine('ejs', ejsMate);
