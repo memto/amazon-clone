@@ -8,18 +8,28 @@ router.get('/add-category', (req, res, next) => {
 });
 
 router.post('/add-category', (req, res, next) => {
-  if (!req.body.name) {
+  const { name } = req.body;
+  if (!name) {
     req.flash('error', 'Name field is required');
     return res.redirect('/add-category');
   }
 
-  const category = new Category();
-  category.name = req.body.name;
-  return category.save((err) => {
-    if (err) return next(err);
+  return Category.findOne({ name }, (errFind, category) => {
+    if (errFind) return next(errFind);
 
-    req.flash('message', 'Added new catefory successfuly');
-    return res.redirect('/add-category');
+    if (category) {
+      req.flash('error', 'Existed category');
+      return res.redirect('/add-category');
+    }
+
+    const newCategory = new Category();
+    newCategory.name = req.body.name;
+    return newCategory.save((err) => {
+      if (err) return next(err);
+
+      req.flash('message', 'Added new catefory successfuly');
+      return res.redirect('/add-category');
+    });
   });
 });
 

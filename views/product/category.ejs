@@ -11,7 +11,7 @@
           </button>
           <%= message %>
         </div>
-      <% } else { %>
+      <% } else if (error.length > 0) { %>
         <div class="alert alert-danger alert-dismisible">
           <button type="button" class="close" data-dismmiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
