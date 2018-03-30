@@ -1,9 +1,10 @@
 module.exports = {
-  dbUser: 'root',
-  dbPassword: 'pW20081790',
+  dbUser: '',
+  dbPassword: '',
 
   getDbUri() {
-    return `mongodb://${this.dbUser}:${this.dbPassword}@ds261138.mlab.com:61138/amazonclone`;
+    // return `mongodb://${this.dbUser}:${this.dbPassword}@ds261138.mlab.com:61138/amazonclone`;
+    return 'mongodb://localhost:27017/amazonclone';
   },
 
   secretKey: 'gnad@@#@$@!',
