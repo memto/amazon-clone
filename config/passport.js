@@ -1,6 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('../models/users');
+const User = require('../models/user');
 
 //= middleware to process login
 passport.use('local-login', new LocalStrategy({
