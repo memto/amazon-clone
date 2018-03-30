@@ -51,10 +51,12 @@ app.set('view engine', 'ejs');
 const mainController = require('./controllers/main');
 const authenController = require('./controllers/authentication');
 const accountController = require('./controllers/account');
+const productController = require('./controllers/product');
 
 app.use('/', mainController);
 authenController(app);
 accountController(app);
+productController(app);
 
 app.listen(secret.serverPort, (err) => {
   if (err) throw err;
