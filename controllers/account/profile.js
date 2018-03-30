@@ -24,7 +24,7 @@ router.post('/edit-profile', (req, res, next) => {
     const temp = user;
 
     if (req.body.name) temp.profile.name = req.body.name;
-    if (req.body.address) temp.address = req.body.address;
+    if (req.body.address) temp.profile.address = req.body.address;
 
     return temp.save((errSave) => {
       if (errSave) return next(errSave);

@@ -22,8 +22,8 @@ const UserSchema = new Schema({
       default: 'Anonymous',
     },
     picture: String,
+    address: { type: String, default: 'Unkown' },
   },
-  address: { type: String, default: 'Unkown' },
   history: [{
     date: Date,
     paid: { type: Number, default: 0 },
