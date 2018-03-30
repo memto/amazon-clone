@@ -1,10 +1,11 @@
 const router = require('express').Router();
 const Category = require('../../models/category');
+const Product = require('../../models/product');
 
 router.get('/add-category', (req, res, next) => {
   if (!req.user) return res.redirect('/login');
 
-  return res.render('product/category', { error: req.flash('error'), message: req.flash('message') });
+  return res.render('product/add-category', { error: req.flash('error'), message: req.flash('message') });
 });
 
 router.post('/add-category', (req, res, next) => {
@@ -32,5 +33,17 @@ router.post('/add-category', (req, res, next) => {
     });
   });
 });
+
+router.get('/:id', (req, res, next) => {
+  Product
+    .find({ category: req.params.id })
+    .populate('category')
+    .exec((err, products) => {
+      if (err) return next(err);
+
+      return res.render('product/category', { products });
+    });
+});
+
 
 module.exports = router;

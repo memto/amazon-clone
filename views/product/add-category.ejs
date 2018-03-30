@@ -1,0 +1,33 @@
+<%- layout('layout') -%>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+      <!-- handle flash message -->
+      <% if (message.length > 0) { %>
+        <div class="alert alert-success alert-dismisible">
+          <button type="button" class="close" data-dismmiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <%= message %>
+        </div>
+      <% } else if (error.length > 0) { %>
+        <div class="alert alert-danger alert-dismisible">
+          <button type="button" class="close" data-dismmiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <%= error %>
+        </div>
+      <% } %>
+
+          <h2>Add category</h2>
+          <form method="post">
+            <div class="form-group">
+              <label for="name">name: </label>
+              <input type="text" name="name" id="name" class="form-control">
+            </div>
+         
+            <button type="submit" class="btn btn-success">Summit</button>
+          </form>
+    </div>
+  </div>
