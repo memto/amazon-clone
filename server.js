@@ -51,7 +51,7 @@ app.use((req, res, next) => {
   Category.find({}, (err, categories) => {
     if (err) return next(err);
 
-    res.locals.categoriesName = categories.map(cat => cat.name);
+    res.locals.categories = categories;
     return next();
   });
 });

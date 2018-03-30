@@ -12,12 +12,14 @@
     </div>
 
     <ul class="nav navbar-nav navbar-right">
-      <% if(categoriesName) { %>
+      <% if(categories) { %>
         <li>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories</a>
           <ul class="dropdown-menu">
-            <% for (let i = 0; i < categoriesName.length; i++) { %>
-              <li class="dropdown-item"> <a href="#"><%= categoriesName[i] %></a></li>
+            <% for (let i = 0; i < categories.length; i++) { %>
+              <li class="dropdown-item"> 
+                <a href="/category/<%= categories[i]._id %>"><%= categories[i].name %></a>
+              </li>
             <% } %>
           </ul>
         </li>
