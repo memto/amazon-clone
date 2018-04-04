@@ -59,5 +59,10 @@ cannot call passport.deserializeUser and cannot set *req.user*
       // return writetop();
       return;
 
-  - install elasticsearch: https://memto.github.io/linux/tooltips/2018/04/04/elasticsearch-ubuntu-16-04/
+  - install elasticsearch: 
+    https://memto.github.io/linux/tooltips/2018/04/04/elasticsearch-ubuntu-16-04/
+
+  - mongoosastic and elasticsearch: 
+    https://memto.github.io/linux/program/tooltips/2018/04/04/mongoosastic-4-4-1-and-elasticsearch-6-2-3/
+
 TODO:

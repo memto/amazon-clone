@@ -26,10 +26,10 @@ mongoose.connect(secret.getDbUri(), (err) => {
 
 Product.createMapping((err, mapping) => {
   if (err) {
-    console.log("Mapping error");
+    console.log('Mapping error');
     console.log(err);
   } else {
-    console.log("Mapping created");
+    console.log('Mapping created');
     console.log(mapping);
   }
 });
