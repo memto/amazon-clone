@@ -12,6 +12,7 @@ const passport = require('passport');
 const secret = require('./config/secret');
 
 const Category = require('./models/category');
+const Product = require('./models/product');
 
 // connect db
 mongoose.connect(secret.getDbUri(), (err) => {
@@ -21,6 +22,30 @@ mongoose.connect(secret.getDbUri(), (err) => {
     console.log('connected to db');
   }
   return 0;
+});
+
+Product.createMapping((err, mapping) => {
+  if (err) {
+    console.log("Mapping error");
+    console.log(err);
+  } else {
+    console.log("Mapping created");
+    console.log(mapping);
+  }
+});
+
+const stream = Product.synchronize();
+let count = 0;
+stream.on('data', () => {
+  count += 1;
+});
+
+stream.on('close', () => {
+  console.log(`mapped ${count} documents`);
+});
+
+stream.on('error', (err) => {
+  console.log(err);
 });
 
 const app = express();
