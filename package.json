@@ -20,6 +20,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.15.6",
     "faker": "^4.1.0",
+    "mongoosastic": "^4.4.1",
     "mongoose": "^5.0.9",
     "morgan": "^1.9.0",
     "passport": "^0.4.0",
