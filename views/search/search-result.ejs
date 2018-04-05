@@ -5,7 +5,12 @@
     <% if (data.length === 0) { %>
       <h3>Search not found</h3>
     <% } else { %>
-      <h3>Search Results for <%= queryString %></h3>
+      <% if (queryString) { %>
+        <h3>Search Results for <%= queryString %></h3>
+      <% } else {%>
+        <h3>We bring all we have for you</h3>
+      <% } %>
+
       <hr>
       <br>
       <div class="row">

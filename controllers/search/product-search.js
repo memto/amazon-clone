@@ -23,7 +23,14 @@ router.get('/', (req, res, next) => {
     });
   }
 
-  return res.json('Invalid request');
+  return Product.search({ match_all: {} }, (err, results) => {
+    if (err) return next(err);
+
+    const data = results.hits.hits.map(hit => hit);
+
+    // return res.json(data);
+    return res.render('search/search-result', { queryString: null, data });
+  });
 });
 
 module.exports = router;
