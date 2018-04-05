@@ -89,12 +89,14 @@ const authenController = require('./controllers/authentication');
 const accountController = require('./controllers/account');
 const productController = require('./controllers/product');
 const apiRoutes = require('./api/api');
+const searchController = require('./controllers/search');
 
 app.use('/', mainController);
 authenController(app);
 accountController(app);
 productController(app);
 app.use('/api', apiRoutes);
+searchController(app);
 
 app.listen(secret.serverPort, (err) => {
   if (err) throw err;

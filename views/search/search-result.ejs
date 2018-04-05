@@ -1,0 +1,34 @@
+<%- layout('layout') -%>
+
+  <div class="container">
+
+    <% if (data.length === 0) { %>
+      <h3>Search not found</h3>
+    <% } else { %>
+      <h3>Search Results for <%= queryString %></h3>
+      <hr>
+      <br>
+      <div class="row">
+        <% for (let i=0; i < data.length; i++) { %>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <img src="<%= data[i]._source.image %>" alt="thumbnail" />
+              <div class="caption">
+                <a href="/product/<%= data[i]._id %>">
+                  <h3>
+                    <%= data[i]._source.name %>
+                  </h3>
+                </a>
+                <p>Price:
+                  <%= data[i]._source.price %>$</p>
+                  <p>Category:
+                    <%= data[i]._source.category.name %>
+                  </p>
+                </div>
+            </div>
+          </div>
+        <% } %>
+      </div>
+          
+    <% } %>
+  </div>
