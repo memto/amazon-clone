@@ -8,7 +8,7 @@
       <% if (queryString) { %>
         <h3>Search Results for <%= queryString %></h3>
       <% } else {%>
-        <h3>We bring all we have for you</h3>
+        <h3>We bring you all best price</h3>
       <% } %>
 
       <hr>
@@ -20,16 +20,10 @@
               <img src="<%= data[i]._source.image %>" alt="thumbnail" />
               <div class="caption">
                 <a href="/product/<%= data[i]._id %>">
-                  <h3>
-                    <%= data[i]._source.name %>
-                  </h3>
+                  <h3><%= data[i]._source.name %></h3>
                 </a>
-                <p>Price:
-                  <%= data[i]._source.price %>$</p>
-                  <p>Category:
-                    <%= data[i]._source.category.name %>
-                  </p>
-                </div>
+                <p>Price: <%= data[i]._source.price %>$</p>
+              </div>
             </div>
           </div>
         <% } %>

@@ -23,7 +23,9 @@ router.get('/', (req, res, next) => {
     });
   }
 
-  return Product.search({ match_all: {} }, (err, results) => {
+  const query = { match_all: {} };
+  const sort = { price: { order: 'asc' } };
+  return Product.search(query, { sort }, (err, results) => {
     if (err) return next(err);
 
     const data = results.hits.hits.map(hit => hit);
