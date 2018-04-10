@@ -4,6 +4,16 @@ const async = require('async');
 const Category = require('../models/category');
 const Product = require('../models/product');
 
+router.post('/search', (req, res, next) => {
+  return Product.search({
+    query_string: { query: req.body.search_term }
+  }, (err, results) => {
+    if (err) return next(err);
+
+    return res.json(results);
+  })
+});
+
 router.get('/:name', (req, res, next) => {
   async.waterfall(
     [
