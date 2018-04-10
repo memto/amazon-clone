@@ -9,7 +9,7 @@
       <div class="row">
           <!-- <div class="input-group col-md-12"> -->
           <div class="input-group col-md-6 col-md-offset-3">
-            <input type="text" class="form-control input-lg" 
+            <input type="text" id="instance-search" class="form-control input-lg" 
             placeholder="Search" name="search_term" />
             <span class="input-group-btn">
               <button class="btn btn-info btn-lg" type="submit">
@@ -23,7 +23,7 @@
   </div>
 
   <div class="container">
-    <div class="row">
+    <div class="row" id="search-result">
       <% for (let i=0; i < products.length; i++) { %>
         <div class="col-md-4">
           <div class="thumbnail">
