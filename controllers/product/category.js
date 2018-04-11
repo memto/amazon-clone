@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Category = require('../../models/category');
+const { Category } = require('../../models/category');
 const Product = require('../../models/product');
 
 router.get('/add-category', (req, res, next) => {

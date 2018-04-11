@@ -11,7 +11,7 @@ const passport = require('passport');
 
 const secret = require('./config/secret');
 
-const Category = require('./models/category');
+const { Category } = require('./models/category');
 const Product = require('./models/product');
 
 // connect db

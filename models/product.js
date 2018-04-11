@@ -2,9 +2,14 @@ const mongoose = require('mongoose');
 const mongoosastic = require('mongoosastic');
 
 const { Schema } = mongoose;
+const { CategorySchema } = require('./category');
 
 const ProductSchema = new Schema({
-  category: { type: Schema.Types.ObjectId, ref: 'Category' },
+  category: {
+    type: Schema.Types.ObjectId,
+    ref: 'Category',
+    es_schema: CategorySchema,
+  },
   name: String,
   price: Number,
   image: String,
@@ -12,20 +17,9 @@ const ProductSchema = new Schema({
 
 ProductSchema.plugin(mongoosastic, {
   hosts: ['localhost:9200'],
-  customProperties: {
-    category: {
-      type: 'text',
-    },
-    name: {
-      type: 'text',
-    },
-    price: {
-      type: 'long',
-    },
-    image: {
-      type: 'text',
-    },
-  },
+  populate: [
+    { path: 'category' },
+  ],
 });
 
 module.exports = mongoose.model('Product', ProductSchema);
