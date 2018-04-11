@@ -30,15 +30,10 @@
             <img src="<%= products[i].image %>" alt="thumbnail" />
             <div class="caption">
               <a href="/product/<%= products[i]._id %>">
-                <h3>
-                  <%= products[i].name %>
-                </h3>
+                <h3><%= products[i].name %></h3>
               </a>
-              <p>Price:
-                <%= products[i].price %>$</p>
-              <p>Category:
-                <%= products[i].category.name %>
-              </p>
+              <p>Price: <%= products[i].price %> $</p>
+              <p>Category: <%= products[i].category.name %> </p>
             </div>
           </div>
         </div>

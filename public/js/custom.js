@@ -15,7 +15,7 @@ $(function() {
       dataType: 'json',
       success: function onSuccess(results) {
         const data = results.hits.hits.map(hit => hit);
-        // console.log(data);
+        console.log(data);
 
         $('#search-results').empty();
         for (let i=0; i < data.length; i++) {
@@ -28,7 +28,8 @@ $(function() {
           html +=       '<a href="/product/' + data[i]._id + '">';
           html +=         '<h3>' + data[i]._source.name + '</h3>';
           html +=       '</a>';
-          html +=       '<p>Price:' + data[i]._source.price + '</p>';
+          html +=       '<p>Price: ' + data[i]._source.price + '$</p>';
+          html +=       '<p>Category: ' + data[i]._source.category.name + '</p>';
           html +=     '</div>';
           html +=   '</div>';
           html += '</div>';
