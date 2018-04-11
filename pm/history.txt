@@ -65,4 +65,43 @@ cannot call passport.deserializeUser and cannot set *req.user*
   - mongoosastic and elasticsearch: 
     https://memto.github.io/linux/program/tooltips/2018/04/04/mongoosastic-4-4-1-and-elasticsearch-6-2-3/
 
+    Another temporary fix: '[mapper_parsing_exception] No handler for type [string] declared on field [category]'
+    node_modules/mongoosastic/lib/mapping-generator.js
+
+    function getTypeFromPaths (paths, field) {
+        let type = false
+
+        if (paths[field] && paths[field].options.type === Date) {
+          return 'date'
+        }
+
+        if (paths[field] && paths[field].options.type === Boolean) {
+          return 'boolean'
+        }
+
+        if (paths[field] && paths[field].options.type === String) {
+          return 'text'
+        }
+        ...
+    }
+
+    function getMapping (cleanTree, inPrefix) {
+      ...
+      // If it is a objectid make it a string.
+      if (value.type === 'objectid') {
+        if (value.ref && value.es_schema) {
+          mapping[field].type = 'object'
+          mapping[field].properties = getMapping(value, prefix + field)
+          continue
+        }
+        // do not continue here so we can handle other es_ options
+        mapping[field].type = 'text'
+      }
+      ...
+    }
+
+    Error: [illegal_argument_exception] mapper [category] of different type, current type [string], merged_type [ObjectMapper]
+    Cause: this is because there is already index in elasticsearch with category mapping as type string,
+    Fix: delete existed index: curl -XDELETE http://localhost:9200/products
+
 TODO:
