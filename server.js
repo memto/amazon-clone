@@ -37,21 +37,38 @@ app.get('/test-result', (req, res) => {
   res.send(req.query);
 });
 
-app.get('/counter', (req, res) => {
+app.get('/counter', (req, res, next) => {
   console.log(req.cookies);
-  let { count } = req.signedCookies;
-  if (count) {
-    count = Number(count) + 1;
-  } else {
-    count = 0;
-  }
-  res.cookie('count', count, {
-    path: 'dsad/dasdsad/dsadsa',
-    // httpOnly: true,
-    // secure: true,
-    signed: true,
-  });
-  res.send(`count: ${count}`);
+
+  new Promise((resolve, reject) => {
+    const result = Math.random();
+    console.log(`promise run ${result}`);
+    if (result > 0.3) {
+      if (result > 0.8) return next(result);
+      const { count } = req.signedCookies;
+      resolve(count);
+    } else {
+      reject(result);
+    }
+  }).then((count) => {
+    let newCount;
+    if (count) {
+      newCount = Number(count) + 1;
+    } else {
+      newCount = 0;
+    }
+    res.cookie('count', newCount, {
+      signed: true,
+    });
+
+    res.send(`count: ${newCount}`);
+  })
+    .catch((reason) => {
+      console.log(`onRejected ${reason}`);
+      // next(`onRejected ${reason}`);
+      // next();
+      res.send(`onRejected ${reason}`);
+    });
 });
 
 app.listen(3000, (err) => {
