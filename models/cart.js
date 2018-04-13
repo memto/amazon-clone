@@ -7,6 +7,7 @@ const CartSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
+  total: { type: Number, default: 0 },
   items: [
     {
       product: { type: Schema.Types.ObjectId, ref: 'Product' },
