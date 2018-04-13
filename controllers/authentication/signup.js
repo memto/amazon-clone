@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../../models/user');
+const Cart = require('../../models/cart');
 
 router.get('/signup', (req, res) => {
   // console.log("===");
@@ -15,35 +16,51 @@ router.get('/signup', (req, res) => {
 router.post('/signup', (req, res, next) => {
   const { email } = req.body;
   if (email) {
-    User.findOne({ email }, (err, existUser) => {
-      if (err) return next(Error('Database Error'));
+    new Promise((resolve, reject) => {
+      User.findOne({ email }, (err, user) => {
+        if (err) return next(Error('Database error on find user'));
 
-      if (existUser) {
-        req.flash('errors', 'Email already existed');
+        if (user) {
+          req.flash('errors', 'User with the email already existed');
+          return res.redirect('signup');
+        }
 
-        return res.redirect('signup');
-      }
+        const newUser = new User();
+        newUser.profile.name = req.body.name;
+        newUser.email = req.body.email;
+        newUser.password = req.body.password;
+        newUser.profile.picture = newUser.gravatar();
 
-      const user = new User();
-      user.profile.name = req.body.name;
-      user.email = req.body.email;
-      user.password = req.body.password;
-      user.profile.picture = user.gravatar();
+        return newUser.save((saveErr) => {
+          if (saveErr) return next('Database error on save user');
 
-      return user.save((errSave) => {
-        if (errSave) return next(errSave);
-
-        return req.logIn(user, (errLogIn) => {
-          if (errLogIn) return next(errLogIn);
-
-          return res.redirect('/profile');
+          return resolve(newUser);
         });
       });
-    });
-    return 0;
+    })
+      .then((user) => {
+        const newCart = new Cart();
+        newCart.owner = user._id;
+        newCart.items = [];
+        return newCart.save((saveErr) => {
+          if (saveErr) return next('Database error on save cart');
+
+          return req.logIn(user, (errLogIn) => {
+            if (errLogIn) return next(errLogIn);
+
+            return res.redirect('/profile');
+          });
+        });
+      })
+      .catch((reason) => {
+      //
+      });
+  } else {
+    req.flash('errors', 'Email field is required');
+    return res.redirect('signup');
   }
-  req.flash('errors', 'Email field is required');
-  return res.redirect('signup');
+
+  return 'make eslint consistent-return happy';
 });
 
 module.exports = router;
