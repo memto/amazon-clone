@@ -47,8 +47,8 @@ will not be *Schema* instance
 - For example when user login succesfully we redirect he/she to his/her profile page. On that route we check for *req.user* which should be set by passport. But there is some cases when user login succesfully we call redirect, and redirecting happened before *session*, which has user info from passport.serializeUser, be saved. Thus, on *profile* route passport cannot get user info back from session, cannot call passport.deserializeUser and cannot set *req.user*
 - Because *req.user* is not set, request shall be redirect to login page again.
 - FIX: (this is temporary, should check more)
-	
-    comment return writetop(); and add return;: node_modules/express-session/index.js
+
+comment return writetop(); and add return; in: node_modules/express-session/index.js
     
     if (shouldSave(req)) {
       req.session.save(function onsave(err) {
@@ -71,8 +71,7 @@ will not be *Schema* instance
 
 - Another temporary fix for: '[mapper_parsing_exception] No handler for type [string] declared on field [category]'
     
-    
-    node_modules/mongoosastic/lib/mapping-generator.js
+node_modules/mongoosastic/lib/mapping-generator.js
     
     function getTypeFromPaths (paths, field) {
         let type = false
@@ -112,5 +111,4 @@ will not be *Schema* instance
 - Cause: this is because there is already index in elasticsearch with category mapping as type string
 - Fix: delete existed index: curl -XDELETE http://localhost:9200/products
 
-TODO:    
-    
+TODO:
