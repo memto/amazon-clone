@@ -1,17 +1,59 @@
 <%- layout('layout') -%>
 
 <div class="container">
-  <div class="row">
-      <div class="col-md-6">
+    <div class="row">
+        <div class="col-md-6">
         <div class="thumbnail">
             <img src="<%= product.image %>" alt="thumbnail" />
         </div>
-      </div>
-      <div class="col-md-6">
-          <div class="thumbnail">
-              <h3><%= product.name %></h3>
-              <p>Price: <%= product.price %>$</p>
-          </div>
-      </div>
-  </div>
+        </div>
+
+        <div class="col-md-6">
+            <div id="single-product-meta">
+                <h3><%= product.name %></h3>
+                <p>Price($): <%= product.price %></p>
+            </div>
+
+            <form method="post">
+                <div class="row" id="quantity-and-price">
+                    <div class="col-md-4">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <input id="quantity-hidden" type="hidden" name="quantity" value="1"></input>
+
+                            <button class="btn btn-default" id="minus" type="button">-</button>
+                            <button class="btn btn-default" id="quantity" type="button">1</button>
+                            <button class="btn btn-default" id="plus" type="button">+</button>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <input id="product-id-hidden" type="hidden" name="productId" value="<%= product._id %>"></input>                                
+                            <input id="price-hidden" type="hidden" value="<%= product.price %>"></input>
+    
+                            <label class="control-label" for="totalPrice">Total Price($):</label>
+                            <input id="total-price" type="number" readonly name="totalPrice" value="<%= product.price %>"></input>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="add-to-cart">
+                    <% if(user) { %>
+                        <button class="btn btn-primary" type="submit">Add To Cart</button>
+                    <% } else { %>
+                        <div>
+                            <div class="alert alert-warning" role="alert">Login or Signup to start buying!</div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <a class="btn btn-warning" id="login" href="/login">Login</a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a class="btn btn-warning" id="signup" href="/signup">Signup</a>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            </form>            
+        </div>
+    </div>
 </div>

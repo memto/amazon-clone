@@ -5,3 +5,37 @@ body {
 #nav-gap {
   margin-top: -5%;
 }
+
+#single-product-meta {
+  border-top: 1px lightgray solid;
+  margin-bottom: 2em;
+}
+
+#quantity-and-price {
+  margin-bottom: 2em;
+}
+
+#quantity-and-price .btn-group {
+  width: 100%;
+}
+
+#quantity-and-price .btn-group .btn {
+  width: 33.3%;
+}
+
+#quantity-and-price .form-group {
+  margin: 0;
+}
+
+#quantity-and-price .form-group label {
+  margin: 0;
+  font-weight: 500;
+}
+
+#quantity-and-price .form-group #total-price {
+  padding: 5px 0px 5px 2px;
+}
+
+#add-to-cart .btn {
+  width: 100%;
+}

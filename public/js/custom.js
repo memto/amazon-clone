@@ -42,4 +42,26 @@ $(function() {
       }
     })
   });
+
+  function onQuantityChanged() {
+    const clickedBtn = $(this);
+
+    const quantity = $('#quantity-hidden').val();
+    let newQuantity = parseInt(quantity);
+    if (clickedBtn.text() == "-" && quantity > 1) {
+      newQuantity = parseInt(quantity) - 1;      
+    }
+    if (clickedBtn.text() == "+") {
+      newQuantity = parseInt(quantity) + 1;
+    }    
+    $('#quantity-hidden').val(newQuantity);
+    $('#quantity').html(newQuantity);
+    
+    const price = $('#price-hidden').val();
+    const newTotalPrice = parseFloat(price).toFixed(2) * newQuantity;
+    $('#total-price').val(newTotalPrice);
+  }
+
+  $('#minus').on('click', onQuantityChanged);
+  $('#plus').on('click', onQuantityChanged);
 });
